@@ -51,7 +51,7 @@ function insurance(make, year, level) {
     this.level = level;
 }
 
-Insurance.prototype.calculateQuotation = function() {
+Insurance.prototype.calculateQuotation = function(insurance) {
     let price;
     const base = 2000;
 
