@@ -29,7 +29,7 @@ function eventListeners() {
              const insurance = new Insurance(make, year, level);
              const price = insurance.calculateQuotation(insurance);
 
-             html.showResults(price);
+             html.showResults(price, insurance);
         }
     });    
 }
@@ -132,12 +132,31 @@ HTMLUI.prototype.displayError = function(message) {
     },3000);
 }
 
-HTMLUI.prototype.showResults = function(price) {
+HTMLUI.prototype.showResults = function(price, insurance) {
     const result = document.getElementById('result');
 
     const div = document.createElement('div');
 
+    let make = insurance.make;
+
+    switch(make {
+        case '1':
+            make = 'American';
+            break;
+        case '2':
+            make = 'Asian';
+            break;
+        case '3':
+            make = 'European';
+            break;
+                                
+    })
+
     div.innerHTML = '
+        <p class="header">Summary</p>
+        <p>Make: ${make}</p>
+        <p>Year: ${insurance.year}</p>
+        <p>Level: ${insurance.level}</p>
         <p class="total">Total: $ ${price}</p>    
     ';
 
