@@ -26,10 +26,17 @@ function eventListeners() {
             html.displayError('All the fields are mandatory');
 
         } else {
-             const insurance = new Insurance(make, year, level);
-             const price = insurance.calculateQuotation(insurance);
 
-             html.showResults(price, insurance);
+            const prevResult = document.querySelector('#result div');
+            if(prevResult != null) {
+                prevResult.remove();
+            } 
+
+
+            const insurance = new Insurance(make, year, level);
+            const price = insurance.calculateQuotation(insurance);
+
+            html.showResults(price, insurance);
         }
     });    
 }
@@ -160,5 +167,13 @@ HTMLUI.prototype.showResults = function(price, insurance) {
         <p class="total">Total: $ ${price}</p>    
     ';
 
-    result.appendChild(div);
+    const spinner = document.querySelector('#loading img');
+    spinner.style.display = 'block';
+    setTimeout(function() {
+        spinner.style.display = 'none';
+
+        result.appendChild(div);
+    }, 3000);
+
+    
 }
