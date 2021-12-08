@@ -1,13 +1,14 @@
 
 const form = document.getElementById('request-quote');
 
+const html = new HTMLUI();
 
 eventListeners();
 
 function eventListeners() {
     document.addEventListener('DOMContentLoaded', function() {
 
-        const html = new HTMLUListElement();
+        
         html.displayYears();
     
     });
@@ -22,7 +23,8 @@ function eventListeners() {
 
 
         if make === '' || year === '' || level === '' ) {
-            console.log('Error');
+            html.displayError('All the fields are mandatory');
+
         } else {
             console.log('Alright!!');
         }
@@ -49,4 +51,21 @@ HTMLUI.prototype.displayYears = function() {
         option.textContent =i;
         selectYears.appendChild(option);
     }
+}
+
+
+HTMLUI.prototype.displayError = function(message) {
+
+    const div = document.createdElement('div');
+    div.classList = 'error';
+
+    div.innerHTML = '
+        <p>${message}</p>
+    ';
+
+    form.insertBefore(div, document.querySelector('.form-group'));
+
+    setTimeout(function() {
+        document.querySelector('.error').remove();
+    },3000);
 }
