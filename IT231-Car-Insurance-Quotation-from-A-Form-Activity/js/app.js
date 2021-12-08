@@ -26,11 +26,52 @@ function eventListeners() {
             html.displayError('All the fields are mandatory');
 
         } else {
-            console.log('Alright!!');
+             const insurance = new Insurance(make, year, level);
+             const price = insurance.calculateQuotation(insurance);
         }
     });    
 }
 
+
+
+
+
+function insurance(make, year, level) {
+    this.make = make;
+    this.year = year;
+    this.level = level;
+}
+
+Insurance.prototype.calculateQuotation = function() {
+    let price;
+    const base = 2000;
+
+
+    const make = insurance.make;
+
+    switch (make) {
+        case '1':
+            price = base = * 1.15;
+            break;
+        case '2':
+            price = base = * 1.05;
+            break;
+        case '3':
+            price = base = * 1.35;
+            break;
+    }
+
+    const year = insurance.year;
+
+    const difference = this.getYearDifference(year);
+
+    price = price - ((difference * 3) * price) / 100;
+
+    console.log(price);
+}
+Insurance.prototype.getYearDifference = function(year) {
+    return new Date ().getFullYear() - year;
+}
 
 
 function HTMLUI() {}
