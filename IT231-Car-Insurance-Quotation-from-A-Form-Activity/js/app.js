@@ -28,6 +28,8 @@ function eventListeners() {
         } else {
              const insurance = new Insurance(make, year, level);
              const price = insurance.calculateQuotation(insurance);
+
+             html.showResults(price);
         }
     });    
 }
@@ -67,11 +69,30 @@ Insurance.prototype.calculateQuotation = function() {
 
     price = price - ((difference * 3) * price) / 100;
 
-    console.log(price);
+    const level = insurance.level;
+
+    price = this.calculateLevel(price, level);
+
+    return price;
 }
 Insurance.prototype.getYearDifference = function(year) {
     return new Date ().getFullYear() - year;
 }
+
+Insurance.prototype.calculatedLevel = function(price, level) {
+
+
+
+
+    if (level === 'basic') {
+        price = price * 1.30;
+    } else {
+           price = price * 1.50;
+    }
+
+    return price;
+}
+
 
 
 function HTMLUI() {}
